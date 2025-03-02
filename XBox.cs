@@ -33,15 +33,5 @@ namespace COMP003A.VideoGameManagementSystem
         {
             Console.WriteLine("Adding Game...");
         }
-
-        public void EditGame()
-        {
-            Console.WriteLine("Editing Game...");
-        }
-
-        public void DeleteGame()
-        {
-            Console.WriteLine("Deleting Game...");
-        }
     }
 }

@@ -19,16 +19,6 @@ namespace COMP003A.VideoGameManagementSystem
         /// <summary>
         /// Sends an Operation Message indicating the Addition of a Game
         /// </summary>
-        void AddGame();
-
-        /// <summary>
-        /// Sends an Operation Message indicating the Editing of a Game
-        /// </summary>
-        void EditGame();
-
-        /// <summary>
-        /// Sends an Operation Message indicating the Deletion of a Game
-        /// </summary>
-        void DeleteGame();
+        void AddGame();       
     }
 }

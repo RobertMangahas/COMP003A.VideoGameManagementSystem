@@ -83,10 +83,13 @@ namespace COMP003A.VideoGameManagementSystem
                         Console.Write("\nPlease Enter the Name of the Game you want to Edit: ");
                         string gameName = Console.ReadLine();
 
-                        Game foundGame = games.Find( a => a.Name.Equals(gameName, StringComparison.InvariantCultureIgnoreCase) );
-                        if (foundGame != null)
+                        Game editGame = games.Find( a => a.Name.Equals(gameName, StringComparison.InvariantCultureIgnoreCase) );
+                        if (editGame != null)
                         {
-
+                            GameInput();
+                            editGame.Name = name;
+                            editGame.Genre = genre;
+                            editGame.Year = year;
                         }
                         else
                         {

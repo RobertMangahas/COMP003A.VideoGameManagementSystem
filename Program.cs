@@ -13,12 +13,12 @@ namespace COMP003A.VideoGameManagementSystem
         private static string name;
         private static string genre;
         private static int year;
+        private static int choiceMenu;
 
         static void Main(string[] args)
         {
             // List to store all games into library
             List<Game> games = new List<Game>();
-            int choiceMenu;
             string choiceGame;
 
             // Pre-Loaded Games - Provides Example of Overloading
@@ -37,7 +37,18 @@ namespace COMP003A.VideoGameManagementSystem
             {
                 // Calls GenerateMenu() Method - Prompts User to make a choice
                 GenerateMenu();
-                choiceMenu = int.Parse(Console.ReadLine());
+                try // Nested Try-Catch for Checking Valid Integer
+                {
+                    choiceMenu = int.Parse(Console.ReadLine());
+                }
+                catch (FormatException) // Checks if input is a valid integer
+                {
+                    Console.WriteLine("\nError: Please enter a valid integer.");
+                }
+                catch (Exception ex) // Catches extrenuous exceptions that were unexpected
+                {
+                    Console.WriteLine($"\nUnexpected Error: {ex.Message}");
+                }
 
                 switch (choiceMenu)
                 {
@@ -79,6 +90,7 @@ namespace COMP003A.VideoGameManagementSystem
                                 break;
                         }
                         break;
+
                     case 2: // Display All Games
                         Console.WriteLine("\nDisplaying all Games...\n");
                         foreach (Game game in games) // Calls GetDetail() Method for every game in List<Game> games
@@ -86,13 +98,16 @@ namespace COMP003A.VideoGameManagementSystem
                             game.GetDetails();
                         }
                         break;
+
                     case 3: // Edit Game
                         // Prompts User for Name of Game to Edit
                         Console.Write("\nPlease Enter the Name of the Game you want to Edit: ");
                         string gameName = Console.ReadLine();
 
+                        // Finds game to edit in List<Game> games
                         Game editGame = games.Find( a => a.Name.Equals(gameName, StringComparison.InvariantCultureIgnoreCase) );
-                        if (editGame != null)
+                        
+                        if (editGame != null) // If game is found in List<Game> games activate editing sequence
                         {
                             GameInput();
                             editGame.Name = name;
@@ -101,51 +116,59 @@ namespace COMP003A.VideoGameManagementSystem
                             Console.WriteLine("\nEditing Game...");
                             Console.WriteLine("\nGame Details Updated Successfully!");
                         }
-                        else
+                        else // Else default statement if Game is null, not found, or invalid input
                         {
                             Console.WriteLine("\nGame Not Found.");
                         }
                         break;
+
                     case 4: // Delete Game
+                        // Prompts User for Name of Game to Delete
                         Console.Write("\nPlease Enter the Name of the Game you want to Edit: ");
                         string gameDelete = Console.ReadLine();
 
+                        // Finds game to delete in List<Game> games
                         Game deleteGame = games.Find(a => a.Name.Equals(gameDelete, StringComparison.InvariantCultureIgnoreCase));
-                        if (deleteGame != null)
+                        
+                        if (deleteGame != null) // If game is found in List<Game> games activate deletion sequence
                         {
+                            // Prompts User to confirm Deletion of Game with (Y/N)
                             Console.Write($"\nPlease confirm you want to delete the game: {deleteGame}? (y/n): ");
                             string confirmDelete = Console.ReadLine();
-                            if (confirmDelete.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                            if (confirmDelete.Equals("Y", StringComparison.InvariantCultureIgnoreCase)) // If input is Y delete - Ignores case sensitivity
                             {
                                 games.Remove(deleteGame);
                                 Console.WriteLine("Deleting Game...");
                                 Console.WriteLine("Game Deleted Successfully!");
                             }
-                            else if (confirmDelete.Equals("N", StringComparison.InvariantCultureIgnoreCase))
+                            else if (confirmDelete.Equals("N", StringComparison.InvariantCultureIgnoreCase)) // Else if input is N cancel - Ignores case sensitivity
                             {
                                 Console.WriteLine("\nDeletion Cancelled.");                               
                             } 
-                            else
+                            else // Else default statement if Input is Invalid
                             {
                                 Console.WriteLine("Error: Invalid Choice! Please Try Again.");                            
                             }
                         }
-                        else
+                        else // Else default statement if Game is null, not found, or invalid input
                         {
                             Console.WriteLine("\nGame Not Found.");
                         }
                         break;
+
                     case 5: // Exit Program
-                        // Exiting Program Message
+                        // Displays an Exiting Program Message
                         Console.WriteLine("\nExiting the Video Game Library Management System...");
                         break;
-                    default: // Default when Invalid Choice is made
+
+                    default: // Default
                         // Displays an Invalid Choice Message
                         Console.WriteLine("\nInvalid Choice! Please Try Again.");
                         break;
                 }
             } while (choiceMenu != 5);
         }
+
         /// <summary>
         /// Generates Selection Menu and Options
         /// </summary>
@@ -159,6 +182,10 @@ namespace COMP003A.VideoGameManagementSystem
             Console.WriteLine($"5. Exit Program");
             Console.Write("Enter your choice: ");
         }
+
+        /// <summary>
+        /// Generates a series of input prompts for user to Add/Edit a game
+        /// </summary>
         public static void GameInput()
         {
             Console.Write("\nEnter the name of the game: ");
@@ -166,15 +193,15 @@ namespace COMP003A.VideoGameManagementSystem
             Console.Write("Enter the genre of the game: ");
             genre = Console.ReadLine();
             Console.Write("Enter the year the game was published in: ");
-            try // Implemented Try-Catch for Checking Valid Integer
+            try // Nested Try-Catch for Checking Valid Integer
             {
                 year = int.Parse(Console.ReadLine());
             }
-            catch (FormatException)
+            catch (FormatException) // Checks if input is a valid integer
             {
                 Console.WriteLine("\nError: Please enter a valid integer.");
             }
-            catch (Exception ex)
+            catch (Exception ex) // Catches extrenuous exceptions that were unexpected
             {
                 Console.WriteLine($"\nUnexpected Error: {ex.Message}");
             }

@@ -71,7 +71,7 @@ namespace COMP003A.VideoGameManagementSystem
                                 Console.WriteLine("\nGame Added Successfully!");
                                 break;
                             default:
-                                Console.WriteLine("\nInvalid Choice! Please Try Again.");
+                                Console.WriteLine("\nError: Invalid Choice! Please Try Again.");
                                 break;
                         }
                         break;
@@ -110,11 +110,19 @@ namespace COMP003A.VideoGameManagementSystem
                         {
                             Console.Write($"\nPlease confirm you want to delete the game: {deleteGame}? (y/n): ");
                             string confirmDelete = Console.ReadLine();
-                            if (confirmDelete.Equals("Y", StringComparison.InvariantCultureIgnoreCase)) ;
+                            if (confirmDelete.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                             {
                                 games.Remove(deleteGame);
                                 Console.WriteLine("Deleting Game...");
                                 Console.WriteLine("Game Deleted Successfully!");
+                            }
+                            else if (confirmDelete.Equals("N", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                Console.WriteLine("\nDeletion Cancelled.");                               
+                            } 
+                            else
+                            {
+                                Console.WriteLine("Error: Invalid Choice! Please Try Again.");                            
                             }
                         }
                         else

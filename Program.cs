@@ -45,7 +45,7 @@ namespace COMP003A.VideoGameManagementSystem
                 {
                     Console.WriteLine("\nError: Please enter a valid integer.");
                 }
-                catch (Exception ex) // Catches extrenuous exceptions that were unexpected
+                catch (Exception ex) // Catches extraneous exceptions that were unexpected
                 {
                     Console.WriteLine($"\nUnexpected Error: {ex.Message}");
                 }
@@ -124,7 +124,7 @@ namespace COMP003A.VideoGameManagementSystem
 
                     case 4: // Delete Game
                         // Prompts User for Name of Game to Delete
-                        Console.Write("\nPlease Enter the Name of the Game you want to Edit: ");
+                        Console.Write("\nPlease Enter the Name of the Game you want to Delete: ");
                         string gameDelete = Console.ReadLine();
 
                         // Finds game to delete in List<Game> games
@@ -201,7 +201,7 @@ namespace COMP003A.VideoGameManagementSystem
             {
                 Console.WriteLine("\nError: Please enter a valid integer.");
             }
-            catch (Exception ex) // Catches extrenuous exceptions that were unexpected
+            catch (Exception ex) // Catches extraneous exceptions that were unexpected
             {
                 Console.WriteLine($"\nUnexpected Error: {ex.Message}");
             }

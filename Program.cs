@@ -50,6 +50,7 @@ namespace COMP003A.VideoGameManagementSystem
                                 games.Add(nintendo);
                                 nintendo.GameCompany();
                                 nintendo.AddGame();
+                                Console.WriteLine("\nGame Added Successfully!");
                                 break;
                             case "Playstation":
                                 GameInput();
@@ -58,6 +59,7 @@ namespace COMP003A.VideoGameManagementSystem
                                 games.Add(playstation);
                                 playstation.GameCompany();
                                 playstation.AddGame();
+                                Console.WriteLine("\nGame Added Successfully!");
                                 break;
                             case "Xbox":
                                 GameInput();
@@ -66,6 +68,7 @@ namespace COMP003A.VideoGameManagementSystem
                                 games.Add(xbox);
                                 xbox.GameCompany();
                                 xbox.AddGame();
+                                Console.WriteLine("\nGame Added Successfully!");
                                 break;
                             default:
                                 Console.WriteLine("\nInvalid Choice! Please Try Again.");
@@ -90,6 +93,8 @@ namespace COMP003A.VideoGameManagementSystem
                             editGame.Name = name;
                             editGame.Genre = genre;
                             editGame.Year = year;
+                            Console.WriteLine("\nEditing Game...");
+                            Console.WriteLine("\nGame Details Updated Successfully!");
                         }
                         else
                         {
@@ -97,6 +102,25 @@ namespace COMP003A.VideoGameManagementSystem
                         }
                         break;
                     case 4: // Delete Game
+                        Console.Write("\nPlease Enter the Name of the Game you want to Edit: ");
+                        string gameDelete = Console.ReadLine();
+
+                        Game deleteGame = games.Find(a => a.Name.Equals(gameDelete, StringComparison.InvariantCultureIgnoreCase));
+                        if (deleteGame != null)
+                        {
+                            Console.Write($"\nPlease confirm you want to delete the game: {deleteGame}? (y/n): ");
+                            string confirmDelete = Console.ReadLine();
+                            if (confirmDelete.Equals("Y", StringComparison.InvariantCultureIgnoreCase)) ;
+                            {
+                                games.Remove(deleteGame);
+                                Console.WriteLine("Deleting Game...");
+                                Console.WriteLine("Game Deleted Successfully!");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nGame Not Found.");
+                        }
                         break;
                     case 5: // Exit Program
                         Console.WriteLine("\nExiting the Video Game Library Management System...");

@@ -31,7 +31,7 @@ namespace COMP003A.VideoGameManagementSystem
 
         public void AddGame()
         {
-            Console.WriteLine("Adding Game...");
+            Console.WriteLine("Adding Playstation Game...");
         }
     }
 }

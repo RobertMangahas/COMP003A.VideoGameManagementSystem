@@ -8,6 +8,8 @@ namespace COMP003A.VideoGameManagementSystem
 {
     internal class Program
     {
+        // Method-level variables accessible to All methods within Program
+        // Allows for more condensed code
         private static string name;
         private static string genre;
         private static int year;
@@ -19,7 +21,7 @@ namespace COMP003A.VideoGameManagementSystem
             int choiceMenu;
             string choiceGame;
 
-            // Pre-Loaded Games
+            // Pre-Loaded Games - Provides Example of Overloading
             Nintendo nintendoEx = new Nintendo { Name = "Pikmin" };
             games.Add(nintendoEx);
             Playstation playstationEx = new Playstation { Name = "Final Fantasy VII", Genre = "JRPG" };
@@ -27,23 +29,25 @@ namespace COMP003A.VideoGameManagementSystem
             XBox xboxEx = new XBox { Name = "Halo 3", Genre = "FPS", Year = 2007 };
             games.Add(xboxEx);
 
-            // Greet User
+            // Greet User - Display Message Introducing the Program
             Console.WriteLine("Welcome to the Video Game Library Management System!");
 
-            // Do-While Loop
+            // Do-While Loop - Will Loop until satisfied condition of choiceMenu = 5 is met
             do
             {
+                // Calls GenerateMenu() Method - Prompts User to make a choice
                 GenerateMenu();
                 choiceMenu = int.Parse(Console.ReadLine());
 
                 switch (choiceMenu)
                 {
                     case 1: // Add Game
+                        // Prompts User to Choose Between 3 Game Companies
                         Console.Write("\nPlease choose Nintendo, Playstation, or XBox: ");
                         choiceGame = Console.ReadLine();
                         switch (choiceGame)
                         {
-                            case "Nintendo":                                
+                            case "Nintendo":  // Nintendo                              
                                 GameInput();
                                 // Generate New Nintendo Game
                                 Nintendo nintendo = new Nintendo { Name = name, Genre = genre, Year = year };
@@ -52,7 +56,7 @@ namespace COMP003A.VideoGameManagementSystem
                                 nintendo.AddGame();
                                 Console.WriteLine("\nGame Added Successfully!");
                                 break;
-                            case "Playstation":
+                            case "Playstation": // Playstation
                                 GameInput();
                                 // Generate New Playstation Game
                                 Playstation playstation = new Playstation { Name = name, Genre = genre, Year = year };
@@ -61,7 +65,7 @@ namespace COMP003A.VideoGameManagementSystem
                                 playstation.AddGame();
                                 Console.WriteLine("\nGame Added Successfully!");
                                 break;
-                            case "Xbox":
+                            case "Xbox": // Playstation
                                 GameInput();
                                 // Generate New XBox Game
                                 XBox xbox = new XBox { Name = name, Genre = genre, Year = year };
@@ -70,19 +74,20 @@ namespace COMP003A.VideoGameManagementSystem
                                 xbox.AddGame();
                                 Console.WriteLine("\nGame Added Successfully!");
                                 break;
-                            default:
+                            default: // Default when Invalid Choice is Made
                                 Console.WriteLine("\nError: Invalid Choice! Please Try Again.");
                                 break;
                         }
                         break;
                     case 2: // Display All Games
                         Console.WriteLine("\nDisplaying all Games...\n");
-                        foreach (Game game in games)
+                        foreach (Game game in games) // Calls GetDetail() Method for every game in List<Game> games
                         {
                             game.GetDetails();
                         }
                         break;
                     case 3: // Edit Game
+                        // Prompts User for Name of Game to Edit
                         Console.Write("\nPlease Enter the Name of the Game you want to Edit: ");
                         string gameName = Console.ReadLine();
 
@@ -131,9 +136,11 @@ namespace COMP003A.VideoGameManagementSystem
                         }
                         break;
                     case 5: // Exit Program
+                        // Exiting Program Message
                         Console.WriteLine("\nExiting the Video Game Library Management System...");
                         break;
-                    default:
+                    default: // Default when Invalid Choice is made
+                        // Displays an Invalid Choice Message
                         Console.WriteLine("\nInvalid Choice! Please Try Again.");
                         break;
                 }
@@ -159,7 +166,18 @@ namespace COMP003A.VideoGameManagementSystem
             Console.Write("Enter the genre of the game: ");
             genre = Console.ReadLine();
             Console.Write("Enter the year the game was published in: ");
-            year = int.Parse(Console.ReadLine());
+            try // Implemented Try-Catch for Checking Valid Integer
+            {
+                year = int.Parse(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("\nError: Please enter a valid integer.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nUnexpected Error: {ex.Message}");
+            }
         }
     }
 }
